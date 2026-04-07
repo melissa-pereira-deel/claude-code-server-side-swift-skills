@@ -14,7 +14,8 @@ Everything you need to build backends and APIs in Swift — from project scaffol
 
 | File | What It Covers |
 |------|---------------|
-| `SKILL.md` | Entry point — activation triggers, project detection, configuration questions |
+| `SKILL.md` | Entry point — activation triggers, project detection, architecture decision gate |
+| `architecture-decisions.md` | **When to use server-side Swift** (and when not to), Vapor vs Hummingbird decision matrix, ecosystem gaps, comparison with Go/Node/Python, common pitfalls |
 | `vapor-patterns.md` | Vapor 4 routing, controllers, middleware (CORS, rate limiting), DTOs, WebSocket |
 | `hummingbird-patterns.md` | Hummingbird 2 patterns, RequestContext, Vapor vs Hummingbird decision tree |
 | `database-patterns.md` | Fluent ORM models, migrations, queries, relationships, N+1 avoidance, transactions |
@@ -107,6 +108,21 @@ Once installed, just ask Claude Code naturally:
 - **App Store Connect** — Automated submission
 - **Test Plans** — Parallel testing, UI tests in CI
 - **Code Signing** — Cloud-managed certificates
+
+## Architecture-First Philosophy
+
+These skills are designed with a core principle: **tool selection is an architectural decision, not an arbitrary AI choice.**
+
+Before generating any code, the skills guide Claude Code to validate that server-side Swift is the right technology for your project. This means:
+
+- **Presenting trade-offs honestly** — including when Go, Node.js, or Python might be a better fit
+- **Surfacing ecosystem gaps** — like the lack of mature Swift libraries for Kafka, email processing, or Elasticsearch
+- **Considering team context** — hiring pool, existing expertise, and long-term maintenance
+- **Mapping scenarios to recommendations** — a solo indie dev has different needs than a 20-person enterprise team
+
+The `architecture-decisions.md` file includes real-world data from Apple's Password Monitoring Service migration (Java → Swift: 40% throughput increase, 50% memory reduction) and Cultured Code's Things Cloud migration (Python → Swift: 4x faster, 3x cheaper), along with honest assessments of when server-side Swift is *not* the right choice.
+
+The goal: your coding agent should inform architectural decisions, not make them for you.
 
 ## Compatibility
 

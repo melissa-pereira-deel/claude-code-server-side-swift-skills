@@ -59,14 +59,38 @@ Grep: "import SwiftUI" or "import UIKit"
 
 If found, recommend SharedModels package pattern.
 
+## Architecture Decision Gate
+
+**Before asking about framework choice**, validate that server-side Swift is the right technology for this project. Reference **architecture-decisions.md** for the full decision framework.
+
+### Quick Validation (ask yourself, not the user)
+
+1. Does the user have a Swift team or iOS app? → If no, surface alternatives (Go, Node.js, Python)
+2. Does client-server code sharing provide value? → Strongest signal for Swift
+3. Does the project need integrations Swift lacks (Kafka, Elasticsearch, email)? → Surface ecosystem gaps honestly
+
+If any red flags, present trade-offs from architecture-decisions.md before proceeding. Example:
+
+> "Before we start — server-side Swift works best when you have an iOS app that can share models with the backend. Since your project is [web-only / cross-platform / ML-heavy], you might want to consider [Node.js / Go / Python] instead. Want me to explain the trade-offs, or proceed with Swift?"
+
+### If "Help me decide" on Vapor vs Hummingbird
+
+Don't default arbitrarily. Ask about context:
+- **Team size and experience** — New to server Swift? → Vapor (more docs, bigger community)
+- **Project type** — Lambda/microservice? → Hummingbird (smaller binary, first-class Lambda)
+- **Compile time sensitivity** — Tight CI/CD? → Hummingbird (lighter dependency graph)
+- **Feature needs** — Need ORM + auth + WebSocket out of the box? → Vapor
+
+Reference the weighted decision matrix in **architecture-decisions.md** for detailed comparison.
+
 ## Configuration Questions
 
 Ask user via AskUserQuestion:
 
 1. **Which framework do you want to use?**
-   - Vapor (batteries-included, Fluent ORM, larger community)
-   - Hummingbird (lightweight, pure async/await, modular)
-   - Help me decide
+   - Vapor (batteries-included, Fluent ORM, larger community — 78% market share)
+   - Hummingbird (lightweight, pure structured concurrency, modular — ideal for microservices/Lambda)
+   - Help me decide (I'll ask about your project context)
 
 2. **What database do you need?**
    - PostgreSQL (recommended for production)
@@ -256,6 +280,7 @@ struct TodoTests {
 
 ## References
 
+- **architecture-decisions.md** - When to use server-side Swift, Vapor vs Hummingbird decision matrix, ecosystem gaps, pitfalls
 - **vapor-patterns.md** - Routing, controllers, middleware, configuration
 - **hummingbird-patterns.md** - Hummingbird 2 patterns and Vapor vs Hummingbird decision
 - **database-patterns.md** - Fluent ORM, migrations, queries, relationships
