@@ -120,9 +120,14 @@ Before generating any code, the skills guide Claude Code to validate that server
 - **Considering team context** — hiring pool, existing expertise, and long-term maintenance
 - **Mapping scenarios to recommendations** — a solo indie dev has different needs than a 20-person enterprise team
 
-The `architecture-decisions.md` file includes real-world data from Apple's Password Monitoring Service migration (Java → Swift: 40% throughput increase, 50% memory reduction) and Cultured Code's Things Cloud migration (Python → Swift: 4x faster, 3x cheaper), along with honest assessments of when server-side Swift is *not* the right choice.
+Every recommendation in `architecture-decisions.md` is backed by real-world production data:
 
-The goal: your coding agent should inform architectural decisions, not make them for you.
+| Case Study | Migration | Key Results |
+|------------|-----------|-------------|
+| **Apple** — Password Monitoring Service | Java → Swift | 40% throughput ↑, 50% memory ↓, 85% less code |
+| **Cultured Code** — Things Cloud | Python → Swift | 4x faster responses, 3x lower compute cost |
+
+It also includes honest assessments of when server-side Swift is *not* the right choice — because the best tool decision is sometimes "use something else."
 
 ## Compatibility
 
